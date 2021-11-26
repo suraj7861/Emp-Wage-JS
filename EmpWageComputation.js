@@ -23,6 +23,7 @@ function getWorkingHours(empCheck){
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWageArr = new Array();
+let empDailyWageMap = new Map();
 
 function calcDailyWage (empHrs) {     
     return empHrs * WAGE_PER_HOUR;
@@ -38,6 +39,7 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH &&
     let empHrs = getWorkingHours (empCheck);
     totalEmpHrs += empHrs; 
     empDailyWageArr.push(calcDailyWage (empHrs));  
+    empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
 }
 //calculate emp wage
 empWage = calcDailyWage(totalEmpHrs);
@@ -104,3 +106,12 @@ function totalDaysWorked (numOfDays, dailyWage) {
 }   
 console.log("UC 7G- Number of Days Emp Worked: "+    
             + empDailyWageArr.reduce (totalDaysWorked, 0));
+
+// UC8 Use Map to Store daily emp wage with day 
+function totalWage(totalWage, dailyWage){
+    return totalWage + dailyWage;
+}
+console.log("UC 8 - Storing daily Emp wage with day in map : " 
+            + Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
+console.log("display daily wage along with day : " )
+console.log(empDailyWageMap);
